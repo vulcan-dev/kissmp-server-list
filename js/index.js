@@ -3,8 +3,13 @@ var serverCount = 0;
 var lastRow = -1;
 
 function hideRow(row) {
+    // Untoggle the previous row
     $('#' + lastRow).toggle();
-    $('#' + row).toggle();
+    $('#' + lastRow).prev('tr').removeClass('active-row');
+    
+    $('#' + row).toggle()
+    $('#' + row).prev('tr').addClass('active-row');
+
     lastRow = row;
 }
 
