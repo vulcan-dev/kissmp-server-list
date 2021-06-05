@@ -3,10 +3,6 @@ var serverCount = 0;
 var lastRow = -1;
 
 function hideRow(row) {
-    // Untoggle the previous row
-    // $('#' + lastRow).toggle();
-    // $('#' + lastRow).prev('tr').removeClass('active-row');
-    
     if (row == lastRow) {
         $('#' + lastRow).prev('tr').removeClass('active-row');
         $('#' + row).toggle()
@@ -68,12 +64,9 @@ function getLink(str) {
     return str;
 }
 
-function copyToClipboard(str) {
-    navigator.clipboard.writeText(str);
-    document.execCommand('copy');
-}
+function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map, port, version, region) {
+    if (region === null) region = 'Unknown';
 
-function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map, port, version) {
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
         <td>${serverName}</td>
@@ -86,6 +79,7 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
             <table style="min-width:100%;overflow:hidden;position:relative">
                 <thead>
                     <tr>
+                        <th>Region</th>
                         <th>Description</th>
                         <th>IP</th>
                         <th>Port</th>
@@ -94,14 +88,23 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
                 </thead>
                 <tbody>
                     <tr>
+                        <td>${region}</td>
                         <td>${getLink(description)}</td>
                         <td>
                             <div class="tooltip" onclick="
-                                copyToClipboard('${ip}');
+                                // Copy to clipboard
+                                navigator.clipboard.writeText('${ip}');
+                                document.execCommand('copy');
+
                                 $('span.cb-${serverCount}').html(\'Copied to Clipboard\');
+
+                                // Change tooltip text after a few seconds
                                 setTimeout(function() { 
                                     $('span.cb-${serverCount}').html(\'Copy to Clipboard\');
-                                }, 2000)"><p style="color:#E27D60;padding:0;margin:0" class="un">${ip.split(':')[0]}</p>
+                                }, 2000)">
+                                
+                                <p style="color:#E27D60;padding:0;margin:0" class="un">${ip.split(':')[0]}</p>
+
                                 <span class="tooltiptext cb-${serverCount}">
                                     Copy to Clipboard
                                 </span>
@@ -130,14 +133,18 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
 function retreiveData(data) {
     for (const key in data) {
         serverCount++;
+
+        var region = data[key].name.match(/\[[^]*?]/);
+
         addToTable(data[key].name, 
-                   data[key].player_count, 
-                   data[key].max_players, 
-                   data[key].description, 
-                   key, 
-                   data[key].map, 
-                   data[key].port, 
-                   JSON.stringify(data[key].version)
+            data[key].player_count, 
+            data[key].max_players, 
+            data[key].description, 
+            key, 
+            data[key].map, 
+            data[key].port, 
+            JSON.stringify(data[key].version),
+            region
         )
     }
 
