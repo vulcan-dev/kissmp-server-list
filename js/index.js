@@ -65,8 +65,6 @@ function getLink(str) {
 }
 
 function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map, port, version, region) {
-    if (region === null) region = 'Unknown';
-
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
         <td>${serverName}</td>
@@ -144,7 +142,7 @@ function retreiveData(data) {
             data[key].map, 
             data[key].port, 
             JSON.stringify(data[key].version),
-            region
+            region ? region : 'Unknown'
         )
     }
 
