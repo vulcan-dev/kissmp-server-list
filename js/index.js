@@ -59,7 +59,7 @@ function getLink(str) {
     return str;
 }
 
-function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map) {
+function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map, port, version) {
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
         <td>${serverName}</td>
@@ -74,16 +74,20 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
                     <tr>
                         <th>Description</th>
                         <th>IP</th>
+                        <th>Port</th>
+                        <th>Version</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>${getLink(description)}</td>
                         <td>
-                            <div class="tooltip"><a href="#">${ip}
+                            <div class="tooltip"><a href="#">${ip.split(':')[0]}
                                 <span class="tooltiptext">Connect to server</span>
                             </a></div>
                         </td>
+                        <td>${port}</td>
+                        <td>${version.replaceAll(',', '.').replace('[', '').replace(']', '')}</td>
                     </tr>
                 </tbody>
             </table>
@@ -92,10 +96,28 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
     `)
 }
 
+/**
+ * name
+ * player_count
+ * max_players
+ * description
+ * map
+ * port
+ * version
+ */
+
 function retreiveData(data) {
     for (const key in data) {
         serverCount++;
-        addToTable(data[key].name, data[key].player_count, data[key].max_players, data[key].description, key, data[key].map)
+        addToTable(data[key].name, 
+                   data[key].player_count, 
+                   data[key].max_players, 
+                   data[key].description, 
+                   key, 
+                   data[key].map, 
+                   data[key].port, 
+                   JSON.stringify(data[key].version)
+        )
     }
 
     // check if there's no servers
@@ -118,15 +140,4 @@ xmlHttp.onreadystatechange = function () {
     }
 }
 
-/**
- * name
- * player_count
- * max_players
- * description
- * map
- * port
- * version
- */
-
-xmlHttp.open('GET', serverAddress);
 xmlHttp.send();
