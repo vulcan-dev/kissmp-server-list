@@ -16,9 +16,47 @@ function hideRow(row) {
 function wordToUpper(str) {
     str = str.replace('/levels/', '')
                    .replace('/info.json', '')
-                   .replaceAll('_', ' ')
+                   .replaceAll('_', ' ');
 
     return str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+}
+
+function convertToLink(input) {
+    let text = input;
+
+    const aLink = [];
+    const linksFound = text.match(/(?:www|https?)[^\s]+/g);
+
+    if (linksFound != null) {
+        for (let i = 0; i < linksFound.length; i++) {
+            let replace = linksFound[i];
+
+            let linkText = replace.split('/')[2];
+
+            // if the last char is . then replace it with nothing so it doesn't break the link
+            replace = replace.replace(/.\s*$/, '');
+
+            aLink.push('<a href="' + replace + '" target="_blank">' + linkText + '</a>');
+
+            text = text.split(linksFound[i]).map(item => {
+                return aLink[i].includes('iframe') ? item.trim() : item
+            }).join(aLink[i]);
+        }
+        
+        return text;
+    } else {
+        return input;
+    }
+};
+
+
+function getLink(str) {
+    if (str.match(str)) {
+        for (link in str) 
+            return convertToLink(str)
+    }
+
+    return str;
 }
 
 function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map) {
@@ -31,7 +69,7 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
     
     <tr id="hidden_row${serverCount}" class="hidden_row">
         <td colspan="4">
-            <table>
+            <table style="min-width:100%;overflow:hidden;position:relative">
                 <thead>
                     <tr>
                         <th>Description</th>
@@ -40,7 +78,7 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${description}</td>
+                        <td>${getLink(description)}</td>
                         <td>
                             <div class="tooltip"><a href="#">${ip}
                                 <span class="tooltiptext">Connect to server</span>

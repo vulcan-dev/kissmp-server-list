@@ -1,14 +1,30 @@
+@font-face {
+    font-family: Heebo-Light;
+    src: url(../assets/fonts/Heebo/Heebo-Light.ttf);
+}
+
+@font-face {
+    font-family: Heebo-Bold;
+    src: url(../assets/fonts/Heebo/Heebo-Bold.ttf);
+}
+
+html {
+    background-color:#1A1A1D;
+}
+
 .content-table {
     border-collapse: collapse;
     margin: 25px auto 0 auto;
     font-size: 0.9em;
-    min-width: 1000px;
+    min-width: 100%;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: white;
 }
 
 .content-table thead tr {
+    font-family: Heebo-Bold;
     background-color: #41B3A3;
     color: #fff;
     text-align: left;
@@ -17,6 +33,7 @@
 
 .content-table th,
 .content-table td {
+    font-family: Heebo-Light;
     padding: 12px 15px;
 }
 
