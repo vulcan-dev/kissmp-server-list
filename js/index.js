@@ -54,16 +54,6 @@ function convertToLink(input) {
     }
 };
 
-
-function getLink(str) {
-    if (str.match(str)) {
-        for (link in str) 
-            return convertToLink(str)
-    }
-
-    return str;
-}
-
 function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map, port, version, region) {
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
@@ -87,7 +77,7 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
                 <tbody>
                     <tr>
                         <td>${region}</td>
-                        <td>${getLink(description)}</td>
+                        <td>${convertToLink(description)}</td>
                         <td>
                             <div class="tooltip" onclick="
                                 // Copy to clipboard
