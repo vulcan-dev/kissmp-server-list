@@ -8,12 +8,20 @@ function hideRow(row) {
     lastRow = row;
 }
 
+function wordToUpper(str) {
+    str = str.replace('/levels/', '')
+                   .replace('/info.json', '')
+                   .replaceAll('_', ' ')
+
+    return str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+}
+
 function addToTable(serverName, currentPlayers, description, ip, map) {
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
         <td>${serverName}</td>
         <td>${currentPlayers}</td>
-        <td>${map}</td>
+        <td>${wordToUpper(map)}</td>
     </tr>
     
     <tr id="hidden_row${serverCount}" class="hidden_row">
