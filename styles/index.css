@@ -44,16 +44,15 @@
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
-    background-color: black;
+    width: 130px;
+    background-color: #E27D60;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 0px;
     padding: 5px 0;
 
     /* Position the tooltip */
@@ -66,4 +65,9 @@
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+a, a:link {
+    text-decoration: none !important;
+    color: #E8A87C !important;
 }

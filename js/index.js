@@ -21,11 +21,11 @@ function wordToUpper(str) {
     return str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
 
-function addToTable(serverName, currentPlayers, description, ip, map) {
+function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map) {
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
         <td>${serverName}</td>
-        <td>${currentPlayers}</td>
+        <td>${currentPlayers}/${maxPlayers}</td>
         <td>${wordToUpper(map)}</td>
     </tr>
     
@@ -57,7 +57,7 @@ function addToTable(serverName, currentPlayers, description, ip, map) {
 function retreiveData(data) {
     for (const key in data) {
         serverCount++;
-        addToTable(data[key].name, data[key].player_count, data[key].description, key, data[key].map)
+        addToTable(data[key].name, data[key].player_count, data[key].max_players, data[key].description, key, data[key].map)
     }
 }
 
