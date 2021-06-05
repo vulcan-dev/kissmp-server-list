@@ -59,6 +59,11 @@ function getLink(str) {
     return str;
 }
 
+function copyToClipboard(str) {
+    navigator.clipboard.writeText(str);
+    document.execCommand('copy');
+}
+
 function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map, port, version) {
     $('.content-table > tbody').append(`
     <tr onclick="hideRow('hidden_row${serverCount}')" class="hover">
@@ -82,8 +87,15 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
                     <tr>
                         <td>${getLink(description)}</td>
                         <td>
-                            <div class="tooltip"><a href="#">${ip.split(':')[0]}
-                                <span class="tooltiptext">Connect to server</span>
+                            <div class="tooltip" onclick="
+                                copyToClipboard('${ip}');
+                                $('span.cb-${serverCount}').html(\'Copied to Clipboard\');
+                                setTimeout(function() { 
+                                    $('span.cb-${serverCount}').html(\'Copy to Clipboard\');
+                                }, 2000)"><a href="#">${ip.split(':')[0]}
+                                <span class="tooltiptext cb-${serverCount}">
+                                    Copy to Clipboard
+                                </span>
                             </a></div>
                         </td>
                         <td>${port}</td>
