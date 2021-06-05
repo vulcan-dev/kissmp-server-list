@@ -12,7 +12,7 @@
 * {
     margin: 0;
     padding: 0;
-    
+
     scrollbar-width: auto;
     scrollbar-color: #41B3A3 #1A1A1D;
 }
@@ -98,7 +98,7 @@
     margin-left: -60px;
 }
 
-.un {
+/* .un {
     display: inline-block;
 }
 
@@ -112,7 +112,27 @@
 }
 
 .un:hover::after {
+    width: 50%;
+} */
+
+.un::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    width: 0px;
+    height: 2px;
+    background: #E27D60;
+    transition: all 0.45s;
+}
+
+.un:hover::after {
     width: 100%;
+    left: 0;
+}
+
+.un:hover {
+    text-decoration: none;
 }
 
 .tooltip:hover .tooltiptext {
