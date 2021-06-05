@@ -92,7 +92,7 @@ function addToTable(serverName, currentPlayers, maxPlayers, description, ip, map
                                 $('span.cb-${serverCount}').html(\'Copied to Clipboard\');
                                 setTimeout(function() { 
                                     $('span.cb-${serverCount}').html(\'Copy to Clipboard\');
-                                }, 2000)"><p style="color:#E27D60;padding:0;margin:0">${ip.split(':')[0]}</p>
+                                }, 2000)"><p style="color:#E27D60;padding:0;margin:0" class="un">${ip.split(':')[0]}</p>
                                 <span class="tooltiptext cb-${serverCount}">
                                     Copy to Clipboard
                                 </span>

@@ -80,6 +80,23 @@ html {
     margin-left: -60px;
 }
 
+.un {
+    display: inline-block;
+}
+
+.un::after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: #E27D60;
+    transition: 300ms;
+}
+
+.un:hover::after {
+    width: 100%;
+}
+
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
