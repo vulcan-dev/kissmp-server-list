@@ -42,7 +42,7 @@ function convertToLink(input) {
                 return aLink[i].includes('iframe') ? item.trim() : item
             }).join(aLink[i]);
         }
-        
+
         return text;
     } else {
         return input;
@@ -96,6 +96,13 @@ function retreiveData(data) {
     for (const key in data) {
         serverCount++;
         addToTable(data[key].name, data[key].player_count, data[key].max_players, data[key].description, key, data[key].map)
+    }
+
+    // check if there's no servers
+    if (serverCount <= 0) {
+        $('.content-table > tbody').append(`
+            <h2 style="padding-left:10px;text-align:left;color:#E27D60">No servers available</h2>
+        `)
     }
 }
 
