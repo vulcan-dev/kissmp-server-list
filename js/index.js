@@ -4,13 +4,22 @@ var lastRow = -1;
 
 function hideRow(row) {
     // Untoggle the previous row
-    $('#' + lastRow).toggle();
-    $('#' + lastRow).prev('tr').removeClass('active-row');
+    // $('#' + lastRow).toggle();
+    // $('#' + lastRow).prev('tr').removeClass('active-row');
     
-    $('#' + row).toggle()
-    $('#' + row).prev('tr').addClass('active-row');
+    if (row == lastRow) {
+        $('#' + lastRow).prev('tr').removeClass('active-row');
+        $('#' + row).toggle()
+        lastRow = -1;
+    } else {
+        $('#' + lastRow).prev('tr').removeClass('active-row');
+        $('#' + row).prev('tr').addClass('active-row');
 
-    lastRow = row;
+        $('#' + row).toggle()
+        $('#' + lastRow).toggle()
+
+        lastRow = row;
+    }
 }
 
 function wordToUpper(str) {
@@ -142,9 +151,6 @@ function retreiveData(data) {
 
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open('GET', serverAddress)
-xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*')
-xmlHttp.setRequestHeader('Access-Control-Allow-Methods', 'GET')
-xmlHttp.setRequestHeader('Access-Control-Allow-Headers', 'accept, content-type')
 
 xmlHttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {

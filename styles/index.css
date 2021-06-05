@@ -8,16 +8,34 @@
     src: url(../assets/fonts/Heebo/Heebo-Bold.ttf);
 }
 
-html {
-    background-color: #1A1A1D;
+/* Works on Firefox */
+* {
+    margin: 0;
+    padding: 0;
+    
+    scrollbar-width: auto;
+    scrollbar-color: #41B3A3 #1A1A1D;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #1A1A1D;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #41B3A3;
+    border: 3px solid #41B3A3;
 }
 
 .content-table {
     border-collapse: collapse;
-    margin: 25px auto 0 auto;
+    margin: 0 auto 0 auto;
     font-size: 0.9em;
     min-width: 100%;
-    border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     background-color: white;
@@ -45,8 +63,8 @@ html {
     opacity: 0.4;
 }
 
-.content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #41B3A3;
+.content-table tbody:last-of-type {
+    border-bottom: 4px solid #41B3A3;
 }
 
 .content-table tbody tr.active-row {
