@@ -9,7 +9,7 @@
 }
 
 html {
-    background-color:#1A1A1D;
+    background-color: #1A1A1D;
 }
 
 .content-table {
@@ -84,7 +84,8 @@ html {
     visibility: visible;
 }
 
-a, a:link {
+a,
+a:link {
     text-decoration: none !important;
     color: #E8A87C !important;
 }
