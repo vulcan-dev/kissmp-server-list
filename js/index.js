@@ -1,6 +1,7 @@
 const serverAddress = 'http://kissmp.online:3692/0.4.4';
 var serverCount = 0;
 var lastRow = -1;
+const body = document.body;
 
 function hideRow(row) {
     if (row == lastRow) {
@@ -144,6 +145,19 @@ function retreiveData(data) {
     }
 }
 
+const theme = localStorage.getItem('theme');
+if (theme) body.classList.add(theme);
+
+function setLight() {
+    body.classList.replace('dark', 'light');
+    localStorage.setItem('theme', 'light');
+}
+
+function setDark() {
+    body.classList.replace('light', 'dark');
+    localStorage.setItem('theme', 'dark');
+}
+
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open('GET', serverAddress)
 
@@ -154,3 +168,7 @@ xmlHttp.onreadystatechange = function () {
 }
 
 xmlHttp.send();
+
+/* Search
+ * return pressed -> remove all servers -> loop through servers and if name == search then add that and then add the rest
+*/

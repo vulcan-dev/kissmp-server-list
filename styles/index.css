@@ -8,7 +8,13 @@
     src: url(../assets/fonts/Heebo/Heebo-Bold.ttf);
 }
 
-/* Works on Firefox */
+:root {
+    --green: #41B3A3;
+    --gray: #1A1A1D;
+    --orange: #E27D60;
+    --light-white: #ddd;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +23,6 @@
     scrollbar-color: #41B3A3 #1A1A1D;
 }
 
-/* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
     width: 12px;
 }
@@ -31,6 +36,57 @@
     border: 3px solid #41B3A3;
 }
 
+.light {
+    --bg: white;
+    --text: black;
+    --button: white;
+}
+
+.dark {
+    --bg: var(--gray);
+    --text: white;
+    --button: var(--gray);
+}
+
+nav {
+    height: 35px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: space-between;
+    justify-content: center;
+}
+
+::placeholder {
+    color: var(--text);
+}
+
+nav input {
+    background-color: var(--bg);
+    color: var(--text);
+    text-align: center;
+    width: 92%;
+    height: 15px;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+nav button {
+    background-color: var(--button);
+    color: var(--text);
+    text-align: center;
+    border: none;
+    width: 4%;
+    height: 35px;
+    transition: 0.3s;
+}
+
+nav button:hover {
+    background-color: var(--orange);
+    color: white;
+}
+
 .content-table {
     border-collapse: collapse;
     margin: 0 auto 0 auto;
@@ -38,7 +94,7 @@
     min-width: 100%;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    background-color: white;
+    background-color: var(--bg);
 }
 
 .content-table thead tr {
@@ -49,10 +105,15 @@
     font-weight: bold;
 }
 
-.content-table th,
+.content-table th {
+    font-family: Heebo-Light;
+    padding: 12px 15px;
+}
+
 .content-table td {
     font-family: Heebo-Light;
     padding: 12px 15px;
+    color: var(--text);
 }
 
 .content-table tbody tr {
@@ -87,33 +148,14 @@
     background-color: #E27D60;
     color: #fff;
     text-align: center;
-    border-radius: 0px;
     padding: 5px 0;
 
     /* Position the tooltip */
     position: absolute;
-    z-index: 1;
     bottom: 100%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -62px;
 }
-
-/* .un {
-    display: inline-block;
-}
-
-.un::after {
-    content: '';
-    width: 0px;
-    height: 1px;
-    display: block;
-    background: #E27D60;
-    transition: 300ms;
-}
-
-.un:hover::after {
-    width: 50%;
-} */
 
 .un::after {
     content: '';
